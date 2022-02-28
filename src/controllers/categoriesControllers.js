@@ -10,11 +10,10 @@ export async function getCategories(req, res) {
 }
 
 export async function insertCategorie(req, res) {
-  const { body } = req;
+  let { name } = req.body;
+  name = name.charAt(0).toUpperCase() + name.slice(1);
   try {
-    await connection.query('INSERT INTO categories (name) VALUES ($1)', [
-      body.name,
-    ]);
+    await connection.query('INSERT INTO categories (name) VALUES ($1)', [name]);
     res.sendStatus(201);
   } catch (err) {
     res.status(500).send(err);

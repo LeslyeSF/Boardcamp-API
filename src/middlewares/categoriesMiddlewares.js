@@ -8,7 +8,7 @@ async function verifyCategorieInput(req, res, next) {
   }
   try {
     const categorieVerify = await connection.query(
-      'SELECT * FROM categories WHERE name=$1',
+      'SELECT * FROM categories WHERE LOWER(name)=LOWER($1)',
       [body.name]
     );
 
