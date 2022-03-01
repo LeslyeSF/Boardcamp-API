@@ -1,6 +1,6 @@
 import connection from '../db.js';
 
-async function verifyCategorieInput(req, res, next) {
+async function verifyCategoryInput(req, res, next) {
   const { body } = req;
   if (!body.name) {
     res.sendStatus(401);
@@ -22,4 +22,4 @@ async function verifyCategorieInput(req, res, next) {
   }
 }
 
-export default verifyCategorieInput;
+export default verifyCategoryInput;

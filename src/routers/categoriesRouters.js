@@ -1,13 +1,13 @@
 import express from 'express';
 import {
   getCategories,
-  insertCategorie,
+  insertCategory,
 } from '../controllers/categoriesControllers.js';
-import verifyCategorieInput from '../middlewares/categoriesMiddlewares.js';
+import verifyCategoryInput from '../middlewares/categoriesMiddlewares.js';
 
 const categoriesRouters = express.Router();
 
 categoriesRouters.get('/categories', getCategories);
-categoriesRouters.post('/categories', verifyCategorieInput, insertCategorie);
+categoriesRouters.post('/categories', verifyCategoryInput, insertCategory);
 
 export default categoriesRouters;
