@@ -1,5 +1,5 @@
 import connection from '../db.js';
-import customerSchema from '../schemas/customerSchemas.js';
+import customerSchema from '../schemas/customerSchema.js';
 
 export default async function validateCustomer(req, res, next) {
   const customer = req.body;

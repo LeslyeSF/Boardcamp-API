@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dayjs": "^1.10.8",
     "dotenv": "^16.0.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
