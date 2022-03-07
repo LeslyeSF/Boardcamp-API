@@ -1,17 +1,33 @@
 import connection from '../db.js';
 
 export async function getCustomers(req, res) {
-  const { cpf } = req.query;
-
+  const { cpf, order, desc, offset, limit } = req.query;
+  const orderList = {
+    id: 1,
+    name: 2,
+    phone: 3,
+    cpf: 4,
+    birthday: 5,
+  };
   try {
     let listCustomers;
     if (cpf) {
       listCustomers = await connection.query(
-        'SELECT * FROM customers WHERE cpf LIKE $1',
+        `SELECT * FROM customers WHERE cpf LIKE $1
+        ${order ? `ORDER BY ${orderList[order]} ` : ''}
+        ${desc ? 'DESC ' : ''}
+        ${limit ? `LIMIT ${limit} ` : ''}
+        ${offset ? `OFFSET ${offset} ` : ''}`,
         [`${cpf}%`]
       );
     } else {
-      listCustomers = await connection.query('SELECT * FROM customers');
+      listCustomers = await connection.query(
+        `SELECT * FROM customers
+        ${order ? `ORDER BY ${order} ` : ''}
+        ${desc ? 'DESC ' : ''}
+        ${limit ? `LIMIT ${limit} ` : ''}
+        ${offset ? `OFFSET ${offset} ` : ''}`
+      );
     }
 
     res.status(200).send(listCustomers.rows);

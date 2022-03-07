@@ -1,8 +1,19 @@
 import connection from '../db.js';
 
 export async function getCategories(req, res) {
+  const { order, desc, limit, offset } = req.query;
+  const orderList = {
+    id: 1,
+    name: 2,
+  };
   try {
-    const listCategories = await connection.query('SELECT * FROM categories');
+    const listCategories = await connection.query(
+      `SELECT * FROM categories
+      ${order ? `ORDER BY ${orderList[order]} ` : ''}
+      ${desc ? 'DESC ' : ''}
+      ${limit ? `LIMIT ${limit} ` : ''}
+      ${offset ? `OFFSET ${offset} ` : ''}`
+    );
     res.status(200).send(listCategories.rows);
   } catch (err) {
     res.status(500).send(err);
